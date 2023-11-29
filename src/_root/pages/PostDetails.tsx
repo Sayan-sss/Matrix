@@ -1,15 +1,16 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 
-import {
-  useGetPostById,
-  // useGetUserPosts,
-  useDeletePost,
-} from "@/lib/react-query/queriesAndMutations";
 import { multiFormatDateString } from "@/lib/utils";
 import { useUserContext } from "@/context/AuthContext";
+import {
+  useDeletePost,
+  useGetPostById,
+  useGetUserPosts,
+} from "@/lib/react-query/queriesAndMutations";
 import { Button } from "@/components/ui/button";
 import Loader from "@/components/shared/Loader";
 import PostStats from "@/components/shared/PostStats";
+import GridPostList from "@/components/shared/GridPostList";
 
 const PostDetails = () => {
   const navigate = useNavigate();
@@ -17,14 +18,14 @@ const PostDetails = () => {
   const { user } = useUserContext();
 
   const { data: post, isLoading } = useGetPostById(id);
-  // const { data: userPosts, isLoading: isUserPostLoading } = useGetUserPosts(
-  //   post?.creator.$id
-  // );
+  const { data: userPosts, isLoading: isUserPostLoading } = useGetUserPosts(
+    post?.creator.$id
+  );
   const { mutate: deletePost } = useDeletePost();
 
-  // const relatedPosts = userPosts?.documents.filter(
-  //   (userPost) => userPost.$id !== id
-  // );
+  const relatedPosts = userPosts?.documents.filter(
+    (userPost) => userPost.$id !== id
+  );
 
   const handleDeletePost = () => {
     deletePost({ postId: id, imageId: post?.imageId });
@@ -105,7 +106,7 @@ const PostDetails = () => {
                 <Button
                   onClick={handleDeletePost}
                   variant="ghost"
-                  className={`ghost_details-delete_btn ${
+                  className={`ost_details-delete_btn ${
                     user.id !== post?.creator.$id && "hidden"
                   }`}
                 >
@@ -142,7 +143,7 @@ const PostDetails = () => {
         </div>
       )}
 
-      {/* <div className="w-full max-w-5xl">
+      <div className="w-full max-w-5xl">
         <hr className="border w-full border-dark-4/80" />
 
         <h3 className="body-bold md:h3-bold w-full my-10">
@@ -153,7 +154,7 @@ const PostDetails = () => {
         ) : (
           <GridPostList posts={relatedPosts} />
         )}
-      </div> */}
+      </div>
     </div>
   );
 };

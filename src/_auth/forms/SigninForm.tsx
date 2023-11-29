@@ -61,7 +61,12 @@ const SigninForm = () => {
   return (
     <Form {...form}>
       <div className=" sm:420 flex-center flex-col">
-        <img src="/assets/images/logo.svg" alt="logo" />
+        <img
+          src="/assets/icons/matrix.svg"
+          height={180}
+          width={180}
+          alt="logo"
+        />
 
         <h2 className=" h3-bold md:h2-bold pt-5 sm:pt-12">
           Log in to your account

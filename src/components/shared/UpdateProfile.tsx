@@ -13,17 +13,17 @@ import {
 } from "@/components/ui/form";
 import { useToast } from "@/components/ui/use-toast";
 
-import { ProfileValidation } from "@/lib/validation";
 import { useUserContext } from "@/context/AuthContext";
 import {
   useGetUserById,
   useUpdateUser,
 } from "@/lib/react-query/queriesAndMutations";
-import Loader from "@/components/shared/Loader";
-import ProfileUploader from "@/components/shared/ProfileUploader";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
+import Loader from "./Loader";
+import ProfileUploader from "./ProfileUploader";
+import { Input } from "../ui/input";
+import { Textarea } from "../ui/textarea";
+import { Button } from "../ui/button";
+import { ProfileValidation } from "@/lib/validation";
 
 const UpdateProfile = () => {
   const { toast } = useToast();
